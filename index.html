@@ -3922,6 +3922,10 @@
     var countEl = root.querySelector('#acqui-count');
     var summaryEl = root.querySelector('#acqui-active-summary');
     var emptyEl = root.querySelector('#acqui-empty');
+    var autoScrollTimer = null;
+    var autoScrollResumeTimer = null;
+    var AUTO_SCROLL_INTERVAL = 2800;
+    var AUTO_SCROLL_RESUME_DELAY = 4500;
     var hasDismissedGuide = false;
 
     function dismissFilterGuide() {
@@ -3958,15 +3962,62 @@
         grid.scrollBy({ left: direction * step, behavior: 'smooth' });
     }
 
+    function shouldReduceMotion() {
+        return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    function canAutoScroll() {
+        if (!grid) return false;
+        return (grid.scrollWidth - grid.clientWidth) > 2;
+    }
+
+    function stopAutoScroll() {
+        if (autoScrollTimer) {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = null;
+        }
+    }
+
+    function startAutoScroll() {
+        stopAutoScroll();
+        if (!grid || shouldReduceMotion() || !canAutoScroll()) return;
+
+        autoScrollTimer = setInterval(function () {
+            if (!canAutoScroll()) return;
+            var maxScroll = Math.max(0, grid.scrollWidth - grid.clientWidth);
+            var atEnd = grid.scrollLeft >= (maxScroll - 2);
+
+            if (atEnd) {
+                grid.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                scrollShelf(1);
+            }
+        }, AUTO_SCROLL_INTERVAL);
+    }
+
+    function resumeAutoScrollLater() {
+        if (autoScrollResumeTimer) clearTimeout(autoScrollResumeTimer);
+        autoScrollResumeTimer = setTimeout(startAutoScroll, AUTO_SCROLL_RESUME_DELAY);
+    }
+
     if (scrollPrevEl) {
-        scrollPrevEl.addEventListener('click', function () { scrollShelf(-1); });
+        scrollPrevEl.addEventListener('click', function () {
+            stopAutoScroll();
+            scrollShelf(-1);
+            resumeAutoScrollLater();
+        });
     }
     if (scrollNextEl) {
-        scrollNextEl.addEventListener('click', function () { scrollShelf(1); });
+        scrollNextEl.addEventListener('click', function () {
+            stopAutoScroll();
+            scrollShelf(1);
+            resumeAutoScrollLater();
+        });
     }
     if (grid) {
         grid.addEventListener('scroll', updateShelfControls);
         grid.addEventListener('keydown', function (event) {
+            stopAutoScroll();
             if (event.key === 'ArrowRight') {
                 event.preventDefault();
                 scrollShelf(1);
@@ -3980,9 +4031,23 @@
                 event.preventDefault();
                 grid.scrollTo({ left: grid.scrollWidth, behavior: 'smooth' });
             }
+            resumeAutoScrollLater();
         });
+        grid.addEventListener('mouseenter', stopAutoScroll);
+        grid.addEventListener('mouseleave', resumeAutoScrollLater);
+        grid.addEventListener('focusin', stopAutoScroll);
+        grid.addEventListener('focusout', resumeAutoScrollLater);
+        grid.addEventListener('wheel', function () {
+            stopAutoScroll();
+            resumeAutoScrollLater();
+        }, { passive: true });
+        grid.addEventListener('touchstart', stopAutoScroll, { passive: true });
+        grid.addEventListener('touchend', resumeAutoScrollLater, { passive: true });
     }
-    window.addEventListener('resize', updateShelfControls);
+    window.addEventListener('resize', function () {
+        updateShelfControls();
+        resumeAutoScrollLater();
+    });
 
     function setSelectOptions(selectEl, options, preferredValue) {
         if (!selectEl) return;
@@ -4178,10 +4243,12 @@
 
         if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
         updateShelfControls();
+        resumeAutoScrollLater();
     }
 
     updateFormatTabsUI();
     updateFiltersForActivePage();
     runFilters();
+    startAutoScroll();
 }());
 </script>
