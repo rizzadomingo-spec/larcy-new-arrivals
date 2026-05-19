@@ -17,7 +17,7 @@
         />
     </div>
 
-    <div class="filter-hub" aria-label="Filter controls">
+    <div class="filter-hub" aria-label="Filter controls"> 
         <div class="format-material-label">Type of Materials <span class="filter-guide-text" aria-hidden="true">Try these filters ✨</span></div>
         <div class="format-tabs" role="tablist" aria-label="Acquisition format pages">
             <button type="button" class="format-tab is-active" data-format-page="Print" role="tab" aria-selected="true">Print Books</button>
@@ -3538,6 +3538,48 @@
     opacity: 0;
     animation: larcyAcquiRiseIn 0.55s cubic-bezier(.22,.61,.36,1) 0.32s forwards;
 }
+.acqui-dashboard .acqui-shelf-wrap::before,
+.acqui-dashboard .acqui-shelf-wrap::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 22px;
+    width: 26px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+.acqui-dashboard .acqui-shelf-wrap::before {
+    left: 0;
+    background: linear-gradient(90deg, rgba(243, 246, 248, 0.94) 0%, rgba(243, 246, 248, 0) 100%);
+}
+.acqui-dashboard .acqui-shelf-wrap::after {
+    right: 0;
+    background: linear-gradient(270deg, rgba(243, 246, 248, 0.94) 0%, rgba(243, 246, 248, 0) 100%);
+}
+.acqui-dashboard .acqui-shelf-wrap.is-start::before {
+    opacity: 0;
+}
+.acqui-dashboard .acqui-shelf-wrap.is-end::after {
+    opacity: 0;
+}
+.acqui-dashboard .acqui-shelf-progress {
+    height: 4px;
+    width: min(220px, 55%);
+    margin: 8px auto 0;
+    background: rgba(65, 118, 48, 0.14);
+    border-radius: 999px;
+    overflow: hidden;
+}
+.acqui-dashboard .acqui-shelf-progress-fill {
+    height: 100%;
+    width: 100%;
+    transform-origin: left center;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, #6aa051 0%, #417630 100%);
+    transition: transform 0.2s ease;
+}
 .acqui-dashboard .acqui-scroll-btn {
     border: 1px solid rgba(65, 118, 48, 0.22);
     background: rgba(255, 255, 255, 0.9);
@@ -3619,16 +3661,29 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease, filter 0.22s ease, border-color 0.22s ease;
     position: relative;
 }
 .acqui-dashboard .book-card.show {
     display: flex;
     animation: larcyAcquiFadeIn 0.25s ease both;
+    opacity: 0.9;
+    filter: saturate(0.96);
+}
+.acqui-dashboard .book-card.show.is-spotlight {
+    opacity: 1;
+    filter: saturate(1);
+    border-color: #cfe0c7;
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 12px 26px rgba(65,118,48,0.16);
+    z-index: 2;
 }
 .acqui-dashboard .book-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.acqui-dashboard .book-card.show.is-spotlight:hover {
+    transform: translateY(-4px) scale(1.012);
 }
 .acqui-dashboard .book-card::after {
     content: '';
@@ -3781,6 +3836,62 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+@media (max-width: 760px) {
+    .acqui-dashboard .acqui-meta-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .acqui-dashboard .acqui-meta-left,
+    .acqui-dashboard .acqui-meta-controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .acqui-dashboard .acqui-meta-controls {
+        align-items: stretch;
+    }
+    .acqui-dashboard .acqui-sort {
+        flex: 1 1 160px;
+        min-width: 0;
+    }
+    .acqui-dashboard .acqui-reset-btn {
+        flex: 0 0 auto;
+    }
+    .acqui-dashboard .acqui-scroll-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        top: auto;
+        bottom: -20px;
+        border-color: rgba(65, 118, 48, 0.26);
+        background: #ffffff;
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.10);
+        transform: translateY(0);
+    }
+    .acqui-dashboard .acqui-scroll-btn-prev {
+        left: calc(50% - 48px);
+    }
+    .acqui-dashboard .acqui-scroll-btn-next {
+        right: calc(50% - 48px);
+    }
+    .acqui-dashboard .acqui-shelf-wrap {
+        padding-bottom: 28px;
+    }
+    .acqui-dashboard .acqui-shelf-wrap::before,
+    .acqui-dashboard .acqui-shelf-wrap::after {
+        width: 18px;
+    }
+    .acqui-dashboard .acqui-shelf-progress {
+        margin-top: 10px;
+        width: min(180px, 60%);
+    }
+    .acqui-dashboard .acqui-grid {
+        scroll-padding-inline: 2px;
+    }
+}
 @media (max-width: 640px) {
     .acqui-dashboard {
         padding: 20px 14px;
@@ -3798,13 +3909,14 @@
     .acqui-dashboard .acqui-scroll-btn {
         width: 36px;
         height: 36px;
-        font-size: 1.15rem;
+        bottom: -18px;
+        font-size: 0.95rem;
     }
     .acqui-dashboard .acqui-scroll-btn-prev {
-        left: -6px;
+        left: calc(50% - 42px);
     }
     .acqui-dashboard .acqui-scroll-btn-next {
-        right: -6px;
+        right: calc(50% - 42px);
     }
     .acqui-dashboard .format-tabs {
         grid-template-columns: 1fr;
@@ -3832,6 +3944,11 @@
     .acqui-dashboard .book-card::after,
     .acqui-dashboard .book-card:hover img {
         transition: none;
+        transform: none;
+    }
+    .acqui-dashboard .book-card.show,
+    .acqui-dashboard .book-card.show.is-spotlight,
+    .acqui-dashboard .book-card.show.is-spotlight:hover {
         transform: none;
     }
 }
@@ -3917,16 +4034,32 @@
     var searchEl = root.querySelector('#acqui-search');
     var sortEl = root.querySelector('#acqui-sort');
     var resetEl = root.querySelector('#acqui-reset');
+    var shelfWrapEl = root.querySelector('.acqui-shelf-wrap');
     var scrollPrevEl = root.querySelector('#acqui-scroll-prev');
     var scrollNextEl = root.querySelector('#acqui-scroll-next');
     var countEl = root.querySelector('#acqui-count');
     var summaryEl = root.querySelector('#acqui-active-summary');
     var emptyEl = root.querySelector('#acqui-empty');
+    var progressFillEl = null;
+    var spotlightCardEl = null;
+    var spotlightRaf = null;
     var autoScrollTimer = null;
     var autoScrollResumeTimer = null;
     var AUTO_SCROLL_INTERVAL = 2800;
     var AUTO_SCROLL_RESUME_DELAY = 4500;
     var hasDismissedGuide = false;
+
+    if (shelfWrapEl) {
+        var progressEl = document.createElement('div');
+        progressEl.className = 'acqui-shelf-progress';
+        progressEl.setAttribute('aria-hidden', 'true');
+
+        progressFillEl = document.createElement('span');
+        progressFillEl.className = 'acqui-shelf-progress-fill';
+        progressEl.appendChild(progressFillEl);
+
+        shelfWrapEl.appendChild(progressEl);
+    }
 
     function dismissFilterGuide() {
         if (hasDismissedGuide) return;
@@ -3946,14 +4079,70 @@
     });
 
     function updateShelfControls() {
-        if (!grid || !scrollPrevEl || !scrollNextEl) return;
+        if (!grid) return;
         var maxScroll = Math.max(0, grid.scrollWidth - grid.clientWidth);
         var atStart = grid.scrollLeft <= 2;
         var atEnd = grid.scrollLeft >= (maxScroll - 2);
         var canScroll = maxScroll > 2;
+        var progress = canScroll ? Math.min(1, Math.max(0, grid.scrollLeft / maxScroll)) : 0;
 
-        scrollPrevEl.disabled = !canScroll || atStart;
-        scrollNextEl.disabled = !canScroll || atEnd;
+        if (scrollPrevEl) scrollPrevEl.disabled = !canScroll || atStart;
+        if (scrollNextEl) scrollNextEl.disabled = !canScroll || atEnd;
+        if (shelfWrapEl) {
+            shelfWrapEl.classList.toggle('is-start', atStart || !canScroll);
+            shelfWrapEl.classList.toggle('is-end', atEnd || !canScroll);
+        }
+        if (progressFillEl) {
+            progressFillEl.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+        }
+
+        scheduleSpotlightUpdate();
+    }
+
+    function updateSpotlightCard() {
+        if (!grid) return;
+
+        var visibleCards = cards.filter(function (card) { return card.classList.contains('show'); });
+        if (!visibleCards.length) {
+            if (spotlightCardEl) {
+                spotlightCardEl.classList.remove('is-spotlight');
+                spotlightCardEl = null;
+            }
+            return;
+        }
+
+        var gridRect = grid.getBoundingClientRect();
+        var gridCenterX = gridRect.left + (gridRect.width / 2);
+        var best = null;
+        var bestDistance = Infinity;
+
+        visibleCards.forEach(function (card) {
+            var rect = card.getBoundingClientRect();
+            var centerX = rect.left + (rect.width / 2);
+            var distance = Math.abs(centerX - gridCenterX);
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                best = card;
+            }
+        });
+
+        if (spotlightCardEl && spotlightCardEl !== best) {
+            spotlightCardEl.classList.remove('is-spotlight');
+        }
+        if (best && best !== spotlightCardEl) {
+            best.classList.add('is-spotlight');
+            spotlightCardEl = best;
+        } else if (!best) {
+            spotlightCardEl = null;
+        }
+    }
+
+    function scheduleSpotlightUpdate() {
+        if (spotlightRaf) return;
+        spotlightRaf = window.requestAnimationFrame(function () {
+            spotlightRaf = null;
+            updateSpotlightCard();
+        });
     }
 
     function scrollShelf(direction) {
@@ -4243,6 +4432,7 @@
 
         if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
         updateShelfControls();
+        scheduleSpotlightUpdate();
         resumeAutoScrollLater();
     }
 
