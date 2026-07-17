@@ -6,17 +6,6 @@
         <p class="acqui-subtext">Explore the latest additions to our collection, organized by school, format, and month.</p>
     </div>
 
-    <div class="acqui-search-wrap">
-        <input
-            type="search"
-            id="acqui-search"
-            class="acqui-search"
-            placeholder="Search by title…"
-            autocomplete="off"
-            aria-label="Search titles"
-        />
-    </div>
-
     <div class="filter-hub" aria-label="Filter controls"> 
         <div class="format-material-label">Type of Materials <span class="filter-guide-text" aria-hidden="true">Try these filters!</span></div>
         <div class="format-tabs" role="tablist" aria-label="Acquisition format pages">
@@ -68,6 +57,17 @@
                     <option value="Nov">November</option>
                     <option value="Dec">December</option>
                 </select>
+            </label>
+
+            <label class="filter-field acqui-search-field">
+                <input
+                    type="search"
+                    id="acqui-search"
+                    class="acqui-search"
+                    placeholder="Search by title…"
+                    autocomplete="off"
+                    aria-label="Search titles"
+                />
             </label>
         </div>
     </div>
@@ -129,7 +129,7 @@
 </div>            
             
             
-<div class='book-card Print Book GENERAL SHS 2026 June'>
+<div class='book-card Print Book SHS 2026 June'>
     <img src='https://coverart.oclc.org/ImageWebSvc/oclc/+-+5460783176_140.jpg?SearchOrder=+-+IG,OT,OS,AV,FA,GO&DefaultImage=N&client&allowDefault=true' alt='A dead body never lies'>
     <div class='card-body'>
         <h5 class='book-title'>A dead body never lies</h5>
@@ -156,7 +156,7 @@
     </div>
 </div>
 
-<div class='book-card Print Book SHS SMIT 2026 June'>
+<div class='book-card Print Book SHS 2026 June'>
     <img src='https://coverart.oclc.org/ImageWebSvc/oclc/+-+804773834_140.jpg?SearchOrder=+-+IG,OT,OS,AV,FA,GO&DefaultImage=N&client&allowDefault=true' alt='Fit to lead : transforming your leadership with the 5 pillars of performance'>
     <div class='card-body'>
         <h5 class='book-title'>Fit to lead : transforming your leadership with the 5 pillars of performance</h5>
@@ -4604,6 +4604,9 @@
     color: #999999;
     font-weight: 500;
 }
+.acqui-dashboard .acqui-search-field {
+    grid-column: 1 / -1;
+}
 .acqui-dashboard .acqui-filter,
 .acqui-dashboard .acqui-sort {
     border: 1px solid #e8e8e8;
@@ -4619,6 +4622,14 @@
 .acqui-dashboard .acqui-sort:focus {
     outline: none;
     border-color: #417630;
+}
+.acqui-dashboard .acqui-search-field .acqui-search {
+    padding: 10px 12px;
+    font-size: 0.82rem;
+    border-radius: 10px;
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 @media (min-width: 720px) {
@@ -4673,6 +4684,11 @@
         flex: 0 1 210px;
         max-width: 250px;
     }
+    .acqui-dashboard .acqui-search-field {
+        flex: 1 1 200px;
+        max-width: 300px;
+        margin-left: auto !important;
+    }
     .acqui-dashboard .acqui-filter[data-group="year"] {
         min-width: 100px;
         width: 118px;
@@ -4685,7 +4701,10 @@
         min-width: 150px;
         width: min(100%, 240px);
     }
-    .acqui-dashboard .filter-grid .filter-field + .filter-field {
+    .acqui-dashboard .acqui-search-field .acqui-search {
+        min-width: 180px;
+    }
+    .acqui-dashboard .filter-grid .filter-field:not(.acqui-search-field) + .filter-field:not(.acqui-search-field) {
         margin-left: 0;
     }
 }
