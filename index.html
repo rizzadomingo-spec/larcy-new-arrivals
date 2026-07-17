@@ -18,7 +18,7 @@
     </div>
 
     <div class="filter-hub" aria-label="Filter controls"> 
-        <div class="format-material-label">Type of Materials <span class="filter-guide-text" aria-hidden="true">Try these filters ✨</span></div>
+        <div class="format-material-label">Type of Materials <span class="filter-guide-text" aria-hidden="true">Try these filters!</span></div>
         <div class="format-tabs" role="tablist" aria-label="Acquisition format pages">
             <button type="button" class="format-tab is-active" data-format-page="Print" role="tab" aria-selected="true">Print Books</button>
             <button type="button" class="format-tab" data-format-page="eBook" role="tab" aria-selected="false">eBooks</button>
@@ -89,8 +89,6 @@
         </div>
     </div>
 
-    <p class="acqui-scroll-hint" id="acqui-scroll-hint">Tip: Use ←/→ keys or scroll sideways to browse books faster.</p>
-
     <div class="acqui-shelf-wrap">
         <button type="button" id="acqui-scroll-prev" class="acqui-scroll-btn acqui-scroll-btn-prev" aria-label="Scroll books left">
             <span class="acqui-scroll-btn-arrow" aria-hidden="true">
@@ -99,8 +97,8 @@
                 </svg>
             </span>
         </button>
-        <div id="results-grid" class="acqui-grid" tabindex="0" role="region" aria-label="Books shelf" aria-describedby="acqui-scroll-hint">
-<div id="results-grid" tabindex="0" role="region" aria-label="Books shelf" aria-describedby="acqui-scroll-hint">
+        <div id="results-grid" class="acqui-grid" tabindex="0" role="region" aria-label="Books shelf">
+    <div id="results-grid" tabindex="0" role="region" aria-label="Books shelf">
 
 <div class='book-card Print Book General 2026 June'>
     <img src='https://coverart.oclc.org/ImageWebSvc/oclc/+-+4317150856_140.jpg?SearchOrder=+-+IG,OT,OS,AV,FA,GO&DefaultImage=N&client&allowDefault=true' alt='A people's guide to publishing : build a successful, sustainable, meaningful, book business from the ground up'>
@@ -3098,7 +3096,7 @@
     <div class='card-body'>
         <h5 class='book-title'>JoVE</h5>
         <p class='book-meta'>Journal of Visualized Experiments: A video database for scientific research methods and protocols.World Dissertation Library</p>
-        <a href='https://clr-answers.benilde.edu.ph/faq/276598' target='_blank' class='btn-benilde'>Access Database</a>
+        <a href='https://clr-answers.benilde.edu.ph/faq/276598' target='_blank' class='btn-benilde'>Subscription Ended</a>
     </div>
 </div>
 
@@ -3135,6 +3133,24 @@
         <h5 class='book-title'>MIT Press Direct eBook</h5>
         <p class='book-meta'>A collection of academic eBooks from MIT Press covering technology, engineering, design, cognitive science, and more.</p>
         <a href='https://clr-answers.benilde.edu.ph/faq/275651' target='_blank' class='btn-benilde'>Access Database</a>
+    </div>
+</div>
+
+<div class='book-card Database GENERAL  A.Y. 2025-2026 '>
+    <img src='https://perpustakaan.umsu.ac.id/wp-content/uploads/2025/11/science-direct-logo-750x554.png' alt='ScienceDirect'>
+    <div class='card-body'>
+        <h5 class='book-title'>ScienceDirect</h5>
+        <p class='book-meta'>A leading full-text database offering access to thousands of scientific journals and books across multiple disciplines.</p>
+        <a href='https://clr.benilde.edu.ph/sciencedirect' target='_blank' class='btn-benilde'>Access Database</a>
+    </div>
+</div>
+
+<div class='book-card Database GENERAL  A.Y. 2025-2026 '>
+    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTrk6VovBEVlkO_lVh7aycAkLtFbTD402vhSzAfxSwQKWD-k9-gKvaRYiF&s=10' alt='Scopus'>
+    <div class='card-body'>
+        <h5 class='book-title'>Scopus</h5>
+        <p class='book-meta'>The world's largest abstract and citation database of peer-reviewed research literature, covering science, technology, medicine, and more.</p>
+        <a href='https://clr.benilde.edu.ph/scopus' target='_blank' class='btn-benilde'>Access Database</a>
     </div>
 </div>
 
@@ -4402,7 +4418,7 @@
 
 
     <div class="acqui-empty" id="acqui-empty" style="display:none;">
-        <div class="acqui-empty-icon">📚</div>
+        <div class="acqui-empty-icon"><i class="fi fi-rr-cross-circle" aria-hidden="true"></i></div>
         <p>No items match your current filters. Try a different selection.</p>
     </div>
 
@@ -4414,6 +4430,11 @@
                 </svg>
             </span>
         </button>
+    </div>
+
+    <div id="acqui-db-notice" class="acqui-db-notice" hidden aria-live="polite">
+        <span class="acqui-db-notice-icon" aria-hidden="true"><i class="fi fi-ss-thumbtack"></i></span>
+        <span class="acqui-db-notice-text">These are <strong>newly subscribed</strong> databases for the selected A.Y. — not our complete list. Most of our databases are renewed yearly. <a href="https://clr.benilde.edu.ph/az.php" target="_blank" class="acqui-db-notice-link">See all subscribed databases →</a></span>
     </div>
 
 <style>
@@ -4428,7 +4449,7 @@
     border-radius: 0;
     box-shadow: none;
     padding: 20px 20px;
-    max-width: 1180px;
+    max-width: 1240px;
     margin: 0 auto;
     color: #111827;
 }
@@ -4600,6 +4621,130 @@
     border-color: #417630;
 }
 
+@media (min-width: 720px) {
+    .acqui-dashboard .filter-grid {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .acqui-dashboard .filter-field {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+    .acqui-dashboard .filter-field span {
+        font-size: 0.68rem;
+        letter-spacing: 0.02em;
+        text-transform: none;
+        color: #6b6b6b;
+        font-weight: 600;
+        min-width: 0;
+        white-space: nowrap;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(1) span {
+        min-width: 62px;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(2) span {
+        min-width: 34px;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(3) span {
+        min-width: 44px;
+    }
+    .acqui-dashboard .acqui-filter {
+        padding: 6px 8px;
+        font-size: 0.82rem;
+        border-radius: 8px;
+        min-width: 0;
+        width: 100%;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(1) {
+        flex: 1 1 260px;
+        max-width: 360px;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(2) {
+        flex: 0 1 170px;
+        max-width: 200px;
+        gap: 6px;
+    }
+    .acqui-dashboard .filter-grid .filter-field:nth-child(3) {
+        flex: 0 1 210px;
+        max-width: 250px;
+    }
+    .acqui-dashboard .acqui-filter[data-group="year"] {
+        min-width: 84px;
+        width: 96px;
+    }
+    .acqui-dashboard .acqui-filter[data-group="month"] {
+        min-width: 108px;
+        width: 132px;
+    }
+    .acqui-dashboard .acqui-filter[data-group="prog"] {
+        min-width: 150px;
+        width: min(100%, 240px);
+    }
+    .acqui-dashboard .filter-grid .filter-field + .filter-field {
+        margin-left: 0;
+    }
+}
+
+.acqui-dashboard .acqui-db-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: #f0f7ec;
+    border: 1px solid #c8e0bb;
+    border-left: 4px solid #417630;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: #2f4d24;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.acqui-dashboard .acqui-db-notice:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+}
+.acqui-dashboard .acqui-db-notice[hidden] {
+    display: none;
+}
+.acqui-dashboard .acqui-db-notice-icon {
+    flex-shrink: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.acqui-dashboard .acqui-db-notice-icon i,
+.acqui-dashboard .acqui-empty-icon i {
+    font-size: 1rem;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+}
+.acqui-dashboard .acqui-empty-icon {
+    margin-bottom: 8px;
+    color: #417630;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+.acqui-dashboard .acqui-db-notice-text {
+    flex: 1;
+}
+.acqui-dashboard .acqui-db-notice-link {
+    color: #417630;
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+.acqui-dashboard .acqui-db-notice-link:hover {
+    color: #2f5522;
+}
+
 .acqui-dashboard .acqui-meta-bar {
     display: flex;
     justify-content: space-between;
@@ -4658,6 +4803,7 @@
 }
 .acqui-dashboard .acqui-shelf-wrap {
     position: relative;
+    padding-top: 52px;
     margin-bottom: 6px;
     opacity: 0;
     animation: larcyAcquiRiseIn 0.55s cubic-bezier(.22,.61,.36,1) 0.32s forwards;
@@ -4706,9 +4852,9 @@
 }
 .acqui-dashboard .acqui-scroll-btn {
     position: absolute;
-    top: 50%;
-    width: 44px;
-    height: 44px;
+    top: 0;
+    width: 52px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4716,14 +4862,13 @@
     margin: 0;
     padding: 0;
     border: 1px solid #c6ccd1;
-    border-radius: 999px;
+    border-radius: 12px;
     background-color: #d6dde1;
     box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
     cursor: pointer;
     outline: none;
     z-index: 4;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    transform: translateY(-50%);
 }
 .acqui-dashboard .acqui-scroll-btn-arrow {
     width: 20px;
@@ -4740,13 +4885,13 @@
     fill: #555f66;
 }
 .acqui-dashboard .acqui-scroll-btn-prev {
-    left: -52px;
+    left: 0;
 }
 .acqui-dashboard .acqui-scroll-btn-prev .acqui-scroll-btn-arrow svg {
     transform: rotate(180deg);
 }
 .acqui-dashboard .acqui-scroll-btn-next {
-    right: -52px;
+    right: 0;
 }
 .acqui-dashboard .acqui-scroll-btn:hover:not(:disabled),
 .acqui-dashboard .acqui-scroll-btn:focus-visible:not(:disabled) {
@@ -4762,7 +4907,7 @@
     animation: acqui-slide-in-left 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 .acqui-dashboard .acqui-scroll-btn:active {
-    transform: translateY(-50%) scale(0.97);
+    transform: scale(0.97);
 }
 .acqui-dashboard .acqui-scroll-btn:disabled {
     background-color: #c8d0d5;
@@ -4774,12 +4919,6 @@
 .acqui-dashboard .acqui-scroll-btn:disabled .acqui-scroll-btn-arrow path {
     fill: #7a858d;
 }
-.acqui-dashboard .acqui-scroll-hint {
-    margin: 0 0 10px;
-    font-size: 0.74rem;
-    color: #8b8b8b;
-}
-
 .acqui-dashboard .acqui-grid {
     display: flex;
     flex-wrap: nowrap;
@@ -4926,15 +5065,44 @@
     background: #3a6629;
 }
 
-.acqui-dashboard .book-card.Database img {
-    aspect-ratio: 3 / 2;
-    object-fit: contain;
-    padding: 16px;
-    background: #f5f5f5;
+/* ── Database card overrides ── */
+.acqui-dashboard .book-card.Database {
+    border-color: #dde8d8;
+    background: linear-gradient(160deg, #f8fdf6 0%, #ffffff 60%);
 }
 .acqui-dashboard .book-card.Database .book-cover-wrap {
-    width: 92%;
-    max-width: 180px;
+    width: 86%;
+    max-width: 150px;
+    margin: 12px auto 0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+}
+.acqui-dashboard .book-card.Database img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 62px;
+    aspect-ratio: unset;
+    object-fit: contain;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+}
+.acqui-dashboard .book-card.Database .book-format-badge {
+    top: 8px;
+    right: 8px;
+    background: rgba(65,118,48,0.82);
+    border: 1px solid rgba(255,255,255,0.35);
+}
+.acqui-dashboard .book-card.Database .card-body {
+    padding: 12px;
 }
 
 .acqui-dashboard .acqui-empty {
@@ -5018,7 +5186,16 @@
         flex: 0 0 auto;
     }
     .acqui-dashboard .acqui-scroll-btn {
-        display: none;
+        display: flex;
+        width: 48px;
+        height: 34px;
+        top: 2px;
+        border-radius: 10px;
+    }
+    .acqui-dashboard .acqui-scroll-btn-arrow,
+    .acqui-dashboard .acqui-scroll-btn-arrow svg {
+        width: 18px;
+        height: 18px;
     }
     .acqui-dashboard .acqui-shelf-wrap::before,
     .acqui-dashboard .acqui-shelf-wrap::after {
@@ -5047,7 +5224,19 @@
         flex-basis: 165px;
     }
     .acqui-dashboard .acqui-scroll-btn {
-        display: none;
+        display: flex;
+        width: 42px;
+        height: 30px;
+        top: 4px;
+        border-radius: 9px;
+    }
+    .acqui-dashboard .acqui-scroll-btn-arrow,
+    .acqui-dashboard .acqui-scroll-btn-arrow svg {
+        width: 14px;
+        height: 14px;
+    }
+    .acqui-dashboard .acqui-shelf-wrap {
+        padding-top: 44px;
     }
     .acqui-dashboard .format-tabs {
         grid-template-columns: 1fr;
@@ -5152,6 +5341,8 @@
             { value: '2024', text: '2024' }
         ],
         database: [
+            { value: 'all', text: 'All A.Y.' },
+            { value: '2025-2026', text: 'A.Y. 2025-2026' },
             { value: '2024-2025', text: 'A.Y. 2024-2025' }
         ]
     };
@@ -5166,7 +5357,6 @@
     var sortEl = root.querySelector('#acqui-sort');
     var resetEl = root.querySelector('#acqui-reset');
     var shelfWrapEl = root.querySelector('.acqui-shelf-wrap');
-    var scrollHintEl = root.querySelector('#acqui-scroll-hint');
     var scrollPrevEl = root.querySelector('#acqui-scroll-prev');
     var scrollNextEl = root.querySelector('#acqui-scroll-next');
     var countEl = root.querySelector('#acqui-count');
@@ -5199,19 +5389,7 @@
         root.classList.remove('acqui-guide-active');
     }
 
-    function isMobileShelfView() {
-        return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 760px)').matches;
-    }
-
-    function updateScrollHint() {
-        if (!scrollHintEl) return;
-        scrollHintEl.textContent = isMobileShelfView()
-            ? 'Tip: Swipe left or right to browse books.'
-            : 'Tip: Use ←/→ keys or scroll sideways to browse books faster.';
-    }
-
     root.classList.add('acqui-guide-active');
-    updateScrollHint();
     setTimeout(dismissFilterGuide, 12000);
 
     Object.keys(filters).forEach(function (key) {
@@ -5378,7 +5556,6 @@
         grid.addEventListener('touchend', resumeAutoScrollLater, { passive: true });
     }
     window.addEventListener('resize', function () {
-        updateScrollHint();
         updateShelfControls();
         resumeAutoScrollLater();
     });
@@ -5401,11 +5578,21 @@
         }
     }
 
+    var dbNoticeEl = root.querySelector('#acqui-db-notice');
+
     function updateFiltersForActivePage() {
         var isDatabase = activePage === 'Database';
 
         if (filterFields.prog) filterFields.prog.style.display = isDatabase ? 'none' : '';
         if (filterFields.month) filterFields.month.style.display = isDatabase ? 'none' : '';
+
+        if (dbNoticeEl) {
+            if (isDatabase) {
+                dbNoticeEl.removeAttribute('hidden');
+            } else {
+                dbNoticeEl.setAttribute('hidden', '');
+            }
+        }
 
         if (filters.prog && isDatabase) filters.prog.value = 'all';
         if (filters.month && isDatabase) filters.month.value = 'all';
